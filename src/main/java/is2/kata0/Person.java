@@ -1,14 +1,16 @@
 package is2.kata0;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
 public class Person {
 	private final String name;
-    	private final Calendar birthdate;	
+    	private final LocalDate birthdate;	
 
-	public Person(String name, Calendar birthdate) {
+	public Person(String name, LocalDate birthdate) {
 		this.name = name;
 		this.birthdate = birthdate;
 	}
@@ -18,10 +20,6 @@ public class Person {
 	}
 
 	int getAge() {
-		Calendar now = GregorianCalendar.getInstance();
-		final long MILLISECONDS_PER_YEAR = (long) 365.25f*24*60*60*1000;
-
-		return (int) ((now.getTimeInMillis()-birthdate.getTimeInMillis())
-			/ MILLISECONDS_PER_YEAR);
+		return Period.between(birthdate, LocalDate.now()).getYears();
 	}
 }
