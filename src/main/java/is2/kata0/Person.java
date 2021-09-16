@@ -1,13 +1,14 @@
 package is2.kata0;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class Person {
 	private final String name;
-    	private final Date birthdate;	
+    	private final Calendar birthdate;	
 
-	public Person(String name, Date birthdate) {
+	public Person(String name, Calendar birthdate) {
 		this.name = name;
 		this.birthdate = birthdate;
 	}
@@ -17,6 +18,10 @@ public class Person {
 	}
 
 	int getAge() {
-		return (int) ((new Date().getTime() - birthdate.getTime()) / 365*24*60*60*1000);
+		Calendar now = GregorianCalendar.getInstance();
+		final long MILLISECONDS_PER_YEAR = (long) 365.25f*24*60*60*1000;
+
+		return (int) ((now.getTimeInMillis()-birthdate.getTimeInMillis())
+			/ MILLISECONDS_PER_YEAR);
 	}
 }
